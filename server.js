@@ -8,10 +8,14 @@ app.use((req, res, next) => {
       res.sendFile(path.join(__dirname, `/views/${name}`));
     };
     next();
-  });
+});
+
+app.use('/user',(req, res) => {
+  res.show('log.html');
+});
 
   app.use(express.static(path.join(__dirname, '/public')));
-
+  
   app.get('/', (req, res) => {
     res.show('index.html');
   });
@@ -19,17 +23,13 @@ app.use((req, res, next) => {
   app.get('/about', (req, res) => {
     res.show('about.html');
   });
-  
-  app.get('/user/settings', (req, res) => {
-    res.show('log.html');
-  });
-
-  app.get('/user/panel', (req, res) => {
-    res.show('log.html');
-  });
 
   app.use((req, res) => {
-    res.show('404.png');
+    res.show('NotFound.html');
+  });
+
+  app.listen(8000, () => {
+    console.log('Server is running on port: 8000');
   });
 
   
